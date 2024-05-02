@@ -4,16 +4,16 @@ Layer ,Layer Description  ,In Channels ,Out Channels ,In Dimension              
     2 ,Feature 2          ,16          ,          24 ,H/2 x W/2                    ,H/4 x W/4     ,1          ,Conv2d -> MaxPool
     3 ,Feature 3          ,24          ,          32 ,H/4 x W/4                    ,H/8 x W/8     ,2          ,Conv2d -> MaxPool
     4 ,Feature 4          ,32          ,          64 ,H/8 x W/8                    ,H/16 x W/16   ,3          ,Conv2d -> MaxPool
-    5 ,Feature 5          ,64          ,         128 ,H/16 x W/16                  ,H/32 x W/32   ,4          ,Conv2d -> MaxPool
-    6 ,eSE 4              ,192         ,         128 ,U(H/32 x W/32) + H/16 x W/16 ,H/16 x W/16   ,U(5) + 4   ,eSE
+    5 ,Feature 5          ,64          ,         160 ,H/16 x W/16                  ,H/32 x W/32   ,4          ,Conv2d -> MaxPool
+    6 ,eSE 4              ,224         ,         160 ,U(H/32 x W/32) + H/16 x W/16 ,H/16 x W/16   ,U(5) + 4   ,eSE
     7 ,eSE 3              ,96          ,          64 ,U(H/32 x W/16) + H/8 x W/8   ,H/8 x W/8     ,U(4) + 3   ,eSE
     8 ,eSE 2              ,56          ,          32 ,U(H/8 x W/8) + H/4 x W/4     ,H/4 x W/4     ,U(3) + 2   ,eSE
     9 ,eSE 1              ,40          ,          24 ,U(H/4 x W/4) + H/2 x W/2     ,H/2 x W/2     ,U(2) + 1   ,eSE
-   10 ,Prediction Level 5 ,128         ,         128 ,H/32 x W/32                  ,H/16 x W/16   ,5          ,fDense -> Upsampling
-   11 ,Prediction Level 4 ,320         ,         128 ,H/16 x W/16                  ,H/16 x W/16   ,10 + 4 + 6 ,Conv2d -> dSE -> fDense
-   12 ,Upsampling Level 4 ,128         ,         128 ,H/16 x W/16                  ,H/8 x W/8     ,11         ,Upsampling
-   13 ,Prediction Level 3 ,224         ,          64 ,H/8 x W/8                    ,H/8 x W/8     ,12 + 3 + 7 ,Conv2d -> dSE -> fDense
-   14 ,Upsampling Level 3 ,64          ,          64 ,H/8 x W/8                    ,H/4 x W/4     ,11         ,Upsampling
+   10 ,Prediction Level 5 ,160         ,         160 ,H/32 x W/32                  ,H/16 x W/16   ,5          ,fDense -> Upsampling
+   11 ,Prediction Level 4 ,384         ,         160 ,H/16 x W/16                  ,H/16 x W/16   ,10 + 4 + 6 ,Conv2d -> dSE -> fDense
+   12 ,Upsampling Level 4 ,160         ,         160 ,H/16 x W/16                  ,H/8 x W/8     ,11         ,Upsampling
+   13 ,Prediction Level 3 ,256         ,          64 ,H/8 x W/8                    ,H/8 x W/8     ,12 + 3 + 7 ,Conv2d -> dSE -> fDense
+   14 ,Upsampling Level 3 ,64          ,          64 ,H/8 x W/8                    ,H/4 x W/4     ,13         ,Upsampling
    15 ,Prediction Level 2 ,120         ,          32 ,H/4 x W/4                    ,H/4 x W/4     ,14 + 2 + 8 ,Conv2d -> dSE -> fDense
    16 ,Upsampling Level 2 ,32          ,          32 ,H/4 x W/4                    ,H/2 x W/2     ,11         ,Upsampling
    15 ,Prediction Level 1 ,72          ,          16 ,H/2 x W/2                    ,H x W         ,16 + 1 + 9 ,fDense -> Upsampling -> Conv2d -> dSE
