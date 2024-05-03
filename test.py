@@ -3,6 +3,6 @@ import torchvision
 import numpy as np
 import time
 
-a = torchvision.models.mobilenet_v2(weights='IMAGENET1K_V2')
+a = torchvision.datasets.Kitti('data/', train=True, download=True)
 
-print(a.features)
+print(a[0])
